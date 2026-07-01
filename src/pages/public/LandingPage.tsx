@@ -106,7 +106,7 @@ function HeroSection() {
             Internship Programs
           </h1>
           <p className="text-white/90 text-lg md:text-xl leading-relaxed mb-8">
-            At 509 Army Base Workshop, we explore the extraordinary every day and our work is more than just a profession — it's a lifelong pursuit and a passion. We offer students challenging projects and on-the-job experiences, building confidence, essential technical skills, and career readiness.
+            At 509 Army Base Workshop, we explore the extraordinary every day and our work is more than just a profession it's a lifelong pursuit and a passion. We offer students challenging projects and on-the-job experiences, building confidence, essential technical skills, and career readiness.
           </p>
         </motion.div>
       </div>
@@ -115,66 +115,27 @@ function HeroSection() {
 }
 
 function InternshipComparisonSection({ onApplyClick }: { onApplyClick: () => void }) {
-  const [activeTab, setActiveTab] = useState<'apprentice' | '509'>('apprentice');
-  
   return (
     <section className="py-20 bg-white text-gray-800">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16 grid md:grid-cols-3 gap-12">
-          <div className="md:col-span-2">
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              509 ABW offers two major internship programs for students: Apprentice Internships and 509 Internships. Both provide the chance to work with experts and contribute to real-world projects. Although they operate differently, both are connected parts of our workforce pipeline:
-            </p>
-            <ul className="space-y-4 text-gray-700 list-disc list-inside ml-2">
-              <li><strong>Apprentice Internship</strong> builds technical skills with a 1-year government-mandated structure and stipend.</li>
-              <li><strong>509 Internship</strong> offers short-term, academic project-based hands-on exposure to our missions.</li>
-            </ul>
-            <p className="mt-6 text-gray-700 font-medium">Together, they help us grow a mission-ready future workforce.</p>
-          </div>
-          <div className="hidden md:flex flex-col items-center justify-center">
-             <div className="w-40 h-40 rounded-full overflow-hidden shadow-lg border-4 border-white">
-                <img src="/army_radar_about.png" alt="Students" className="w-full h-full object-cover" />
-             </div>
-          </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="flex gap-8 border-b border-gray-300 mb-12 overflow-x-auto scrollbar-hide">
-          <button 
-            className={`pb-4 text-2xl font-extrabold whitespace-nowrap transition-all ${activeTab === 'apprentice' ? 'border-b-4 border-black text-black' : 'text-gray-400 hover:text-gray-600'}`}
-            onClick={() => setActiveTab('apprentice')}
-          >
-            Apprentice Internship
-          </button>
-          <button 
-            className={`pb-4 text-2xl font-extrabold whitespace-nowrap transition-all ${activeTab === '509' ? 'border-b-4 border-black text-black' : 'text-gray-400 hover:text-gray-600'}`}
-            onClick={() => setActiveTab('509')}
-          >
-            509 Internship
-          </button>
-        </div>
-
-        {/* Tab Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl font-extrabold mb-6 text-black">
-              {activeTab === 'apprentice' ? 'Apprentice Internship' : '509 Internship'}
+              Vocational Summer Training
             </h2>
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              {activeTab === 'apprentice' 
-                ? 'Government-mandated 1-year paid internships that allow college-level students to contribute to our mission to advance defence technology. These experiences help to build technical and professional skills while learning from our mentors.' 
-                : 'Short-term (1-6 months) academic project-based internships. Work on real projects, build your resume, and strengthen your career readiness without stipend constraints. We offer multiple sessions annually.'}
+              45 days academic project-based internships. Work on real projects, build your resume, and strengthen your career readiness without stipend constraints. We offer multiple sessions annually.
             </p>
             
-            <button onClick={onApplyClick} className="flex items-center gap-2 text-red-600 font-bold hover:underline text-lg">
+            <button onClick={onApplyClick} className="flex items-center gap-2 text-red-600 font-bold hover:underline text-lg transition-all hover:text-red-700 group">
               Click Here to Explore Our Opportunities and Apply 
-              <span className="w-5 h-5 flex items-center justify-center bg-red-600 text-white rounded-full ml-1 text-xs">
+              <span className="w-5 h-5 flex items-center justify-center bg-red-600 text-white rounded-full ml-1 text-xs group-hover:bg-red-700 transition-colors">
                 <FiArrowRight />
               </span>
             </button>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-2xl relative">
-            <img src={activeTab === 'apprentice' ? '/army_radar_hero.png' : '/army_radar_about.png'} alt="Internship" className="w-full h-80 object-cover" />
+            <img src="/army_radar_about.png" alt="509 Internship" className="w-full h-80 object-cover" />
           </div>
         </div>
       </div>
@@ -232,16 +193,7 @@ function DomainsSection() {
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-military-green to-gold scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
               
               <h3 className="font-bold text-lg text-gray-900 mb-3 tracking-tight">{d.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed flex-1 mb-8">{d.desc}</p>
-              
-              {/* Badges */}
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {d.badges.map(b => (
-                  <span key={b} className="px-2.5 py-1 bg-gray-50 border border-gray-100 text-gray-600 rounded-md text-[11px] font-semibold tracking-wide">
-                    {b}
-                  </span>
-                ))}
-              </div>
+              <p className="text-sm text-gray-500 leading-relaxed flex-1 mb-2">{d.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -306,7 +258,7 @@ function Footer() {
 
 const FAQS = [
   { q: 'Who is eligible to apply for the internships?', a: 'Engineering students from recognized universities pursuing B.Tech/M.Tech or Diploma courses are eligible to apply.' },
-  { q: 'Is there any stipend provided?', a: 'Apprentice Internships offer a stipend as per government norms. 509 Internships are academic project-based and usually do not include a stipend.' },
+  { q: 'Is there any stipend provided?', a: '509 Internships are academic project-based and usually do not include a stipend.' },
   { q: 'How do I apply for the programs?', a: 'You can apply by clicking the "Explore Our Opportunities and Apply" link and filling out the application form with your details and mandatory documents.' },
   { q: 'Can I choose my preferred domain for the project?', a: 'Yes, you can select your preferred research domain during the application process. Allocation is subject to availability and merit.' },
 ];
@@ -397,8 +349,6 @@ export default function LandingPage() {
       <ProcessSection />
       <DomainsSection />
       <FAQSection />
-      <PathTo509Section />
-      <Footer />
       <ApplicationModal isOpen={showApplicationForm} onClose={() => setShowApplicationForm(false)} />
     </div>
   );

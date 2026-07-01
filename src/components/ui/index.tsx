@@ -148,7 +148,7 @@ interface StatCardProps {
 
 export function StatCard({ title, value, subtitle, icon, trend, iconBg = 'bg-military-green/10' }: StatCardProps) {
   return (
-    <Card hover>
+    <Card>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{title}</p>

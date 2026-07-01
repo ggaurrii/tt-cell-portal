@@ -166,7 +166,7 @@ export default function StudentsPage() {
                   <th className="py-3.5 px-4 text-left">
                     <input type="checkbox" checked={selected.length === paginated.length && paginated.length > 0} onChange={toggleAll} className="rounded accent-military-green" />
                   </th>
-                  {['Student', 'ID / Batch', 'Domain', 'Attendance', 'Projects', 'Status', 'Actions'].map(h => (
+                  {['Student', 'ID / Batch', 'Domain', 'Attendance', 'Projects', 'Actions'].map(h => (
                     <th key={h} className="py-3.5 px-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
@@ -201,9 +201,6 @@ export default function StudentsPage() {
                     </td>
                     <td className="py-3.5 px-4">
                       <span className="text-sm font-medium text-gray-700">{s.projectsCompleted}/{s.projectsAssigned}</span>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <Badge color={s.status === 'active' ? 'green' : s.status === 'completed' ? 'blue' : 'red'}>{s.status}</Badge>
                     </td>
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

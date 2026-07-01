@@ -47,46 +47,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ background: 'linear-gradient(135deg, #0F2419 0%, #1B3A2D 60%, #2D5A3D 100%)' }}>
-      {/* Left panel */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1581092787765-e3feb951d987?w=800&auto=format")', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <div className="relative z-10">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gold rounded-xl flex items-center justify-center">
-              <FiShield className="text-military-dark w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-white font-bold text-lg leading-tight">TT CELL</p>
-              <p className="text-white/60 text-xs">509 Army Base Workshop</p>
-            </div>
-          </Link>
-        </div>
-        <div className="relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-            <h1 className="text-4xl font-extrabold text-white leading-tight mb-4">
-              Empowering Future<br />Engineers Through<br />
-              <span className="text-gold">Technical Excellence</span>
-            </h1>
-            <p className="text-white/60 text-sm leading-relaxed max-w-sm">
-              A centralized vocational training platform to manage technical training programs and student workflows.
-            </p>
-          </motion.div>
-          <div className="mt-10 grid grid-cols-2 gap-4">
-            {[{ n: '500+', l: 'Students Trained' }, { n: '200+', l: 'Projects Done' }, { n: '15+', l: 'Domains' }, { n: '100%', l: 'Placement' }].map(s => (
-              <div key={s.l} className="glass rounded-xl p-4">
-                <div className="text-gold font-extrabold text-xl">{s.n}</div>
-                <div className="text-white/60 text-xs mt-1">{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="relative z-10 text-white/30 text-xs">© 2025 509 Army Base Workshop – TT Cell</div>
-      </div>
-
-      {/* Right panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-surface-muted p-6">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md">
           <div className="bg-white rounded-3xl shadow-2xl p-8">
             {/* Mobile Logo */}
             <div className="lg:hidden flex items-center gap-2 mb-6">
@@ -167,7 +129,6 @@ export default function LoginPage() {
             </p>
           </div>
         </motion.div>
-      </div>
     </div>
   );
 }

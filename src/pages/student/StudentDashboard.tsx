@@ -4,10 +4,6 @@ import { FiCalendar, FiBriefcase, FiCheckCircle, FiBell, FiArrowRight } from 're
 import { Card, Badge, ProgressBar } from '@/components/ui';
 import { useAuth } from '@/context/AuthContext';
 import { MOCK_PROJECTS, MOCK_ANNOUNCEMENTS } from '@/constants/mockData';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { MONTHLY_ATTENDANCE } from '@/constants/mockData';
-
-const STUDENT_ATTENDANCE_MONTHLY = MONTHLY_ATTENDANCE.map(m => ({ ...m, mine: m.percentage - Math.floor(Math.random() * 10) }));
 
 export default function StudentDashboard() {
   const { user } = useAuth();
@@ -51,34 +47,7 @@ export default function StudentDashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="grid lg:grid-cols-3 gap-5">
-        {/* Attendance Chart */}
-        <Card className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="font-bold text-military-dark">My Attendance</h3>
-              <p className="text-xs text-gray-500">Monthly attendance percentage</p>
-            </div>
-            <span className={`text-2xl font-extrabold ${myAttendance >= 75 ? 'text-green-600' : 'text-red-600'}`}>{myAttendance}%</span>
-          </div>
-          <ResponsiveContainer width="100%" height={200}>
-            <AreaChart data={STUDENT_ATTENDANCE_MONTHLY}>
-              <defs>
-                <linearGradient id="myAtt" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#1B3A2D" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#1B3A2D" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f4f0" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} domain={[60, 100]} />
-              <Tooltip contentStyle={{ borderRadius: 10, border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: 12 }} formatter={v => [`${v}%`, 'Attendance']} />
-              <Area type="monotone" dataKey="percentage" stroke="#1B3A2D" strokeWidth={2.5} fill="url(#myAtt)" name="Class Avg" />
-              <Area type="monotone" dataKey="mine" stroke="#C9A227" strokeWidth={2} fill="none" name="My Attendance" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </Card>
-
+      <div className="grid gap-5">
         {/* Announcements */}
         <Card>
           <div className="flex items-center justify-between mb-4">

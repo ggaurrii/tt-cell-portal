@@ -6,13 +6,11 @@ import { MOCK_STUDENTS, ATTENDANCE_TREND } from '@/constants/mockData';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import toast from 'react-hot-toast';
 
-type AttStatus = 'present' | 'absent' | 'late' | 'leave';
+type AttStatus = 'present' | 'absent';
 
 const STATUS_CONFIG: Record<AttStatus, { label: string; color: string; icon: any; badge: any }> = {
   present: { label: 'Present', color: 'bg-green-500', icon: FiCheck, badge: 'green' as any },
   absent: { label: 'Absent', color: 'bg-red-500', icon: FiX, badge: 'red' as any },
-  late: { label: 'Late', color: 'bg-yellow-500', icon: FiClock, badge: 'gold' as any },
-  leave: { label: 'Leave', color: 'bg-blue-500', icon: FiAlertCircle, badge: 'blue' as any },
 };
 
 export default function AttendancePage() {
@@ -29,8 +27,6 @@ export default function AttendancePage() {
   const counts = {
     present: Object.values(attendance).filter(v => v === 'present').length,
     absent: Object.values(attendance).filter(v => v === 'absent').length,
-    late: Object.values(attendance).filter(v => v === 'late').length,
-    leave: Object.values(attendance).filter(v => v === 'leave').length,
   };
   const pct = Math.round((counts.present / MOCK_STUDENTS.length) * 100);
 
@@ -71,7 +67,7 @@ export default function AttendancePage() {
       {tab === 'daily' && (
         <>
           {/* Date + Stats */}
-          <div className="grid md:grid-cols-5 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             <Card className="md:col-span-1">
               <label className="text-xs font-semibold text-gray-500 block mb-2">Select Date</label>
               <input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full px-3 py-2 border border-surface-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-military-green/20" />
@@ -101,7 +97,7 @@ export default function AttendancePage() {
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-sm font-semibold text-gray-700">Mark All:</span>
               {(Object.keys(STATUS_CONFIG) as AttStatus[]).map(s => (
-                <button key={s} onClick={() => markAll(s)} className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${s === 'present' ? 'border-green-300 text-green-700 hover:bg-green-50' : s === 'absent' ? 'border-red-300 text-red-700 hover:bg-red-50' : s === 'late' ? 'border-yellow-300 text-yellow-700 hover:bg-yellow-50' : 'border-blue-300 text-blue-700 hover:bg-blue-50'}`}>
+                <button key={s} onClick={() => markAll(s)} className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${s === 'present' ? 'border-green-300 text-green-700 hover:bg-green-50' : 'border-red-300 text-red-700 hover:bg-red-50'}`}>
                   {STATUS_CONFIG[s].label}
                 </button>
               ))}
@@ -150,7 +146,7 @@ export default function AttendancePage() {
                               <button key={st} onClick={() => setAttendance(prev => ({ ...prev, [s.id]: st }))}
                                 className={`w-7 h-7 rounded-lg text-xs font-bold transition-all border ${status === st ? `${STATUS_CONFIG[st].color} text-white border-transparent` : 'border-surface-border text-gray-400 hover:border-gray-300'}`}
                                 title={STATUS_CONFIG[st].label}>
-                                {st === 'present' ? 'P' : st === 'absent' ? 'A' : st === 'late' ? 'L' : 'V'}
+                                {st === 'present' ? 'P' : 'A'}
                               </button>
                             ))}
                           </div>
@@ -185,7 +181,6 @@ export default function AttendancePage() {
                 <Tooltip contentStyle={{ borderRadius: 12, border: 'none', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', fontSize: 12 }} />
                 <Bar dataKey="present" fill="#1B3A2D" name="Present" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="absent" fill="#C9A227" name="Absent" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="late" fill="#7ab57a" name="Late" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
@@ -198,7 +193,7 @@ export default function AttendancePage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-surface-border bg-surface-subtle/50">
-                    {['Student', 'Present', 'Absent', 'Late', 'Leave', 'Overall %', 'Status'].map(h => (
+                    {['Student', 'Present', 'Absent', 'Overall %', 'Status'].map(h => (
                       <th key={h} className="py-3 px-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
@@ -214,8 +209,6 @@ export default function AttendancePage() {
                       </td>
                       <td className="py-3 px-4 text-green-700 font-semibold">{Math.round(s.attendancePercentage * 0.8)}</td>
                       <td className="py-3 px-4 text-red-600 font-semibold">{Math.round((100 - s.attendancePercentage) * 0.6)}</td>
-                      <td className="py-3 px-4 text-yellow-700 font-semibold">{Math.round(s.attendancePercentage * 0.1)}</td>
-                      <td className="py-3 px-4 text-blue-700 font-semibold">{Math.round((100 - s.attendancePercentage) * 0.4)}</td>
                       <td className="py-3 px-4">
                         <span className={`font-bold ${s.attendancePercentage >= 75 ? 'text-green-700' : 'text-red-600'}`}>{s.attendancePercentage}%</span>
                       </td>
